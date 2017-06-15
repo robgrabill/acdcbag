@@ -1,0 +1,6 @@
+{
+  "name": "ACDC Bag",
+  "description": "A series of PHP scripts allowing for Phishy Slash Commands in Slack",
+  "repository": "https://github.com/spiffyrob/acdcbag",
+  "addons": []
+}
