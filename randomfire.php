@@ -10,7 +10,7 @@ $loadingarray = array(
   "markdwn" => true,
 );
 
-$slack_webhook_url = "https://hooks.slack.com/services/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";
+$slack_webhook_url = getenv('WEB_HOOK');
 $json_payload = json_encode($loadingarray);
 $slack_call = curl_init($slack_webhook_url);
 curl_setopt($slack_call, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
@@ -45,8 +45,9 @@ $err = curl_error($curl);
 curl_close($curl);
 $decode = json_decode($response);
 $array = json_decode(json_encode($decode), true);
+$apikey = getenv('NET_API');
 $showdate = ($array["data"]["date"]);
-$neturl = "https://api.phish.net/v3/setlist/get?apikey=6AB89813BA7F0CD045EA&showdate=".$showdate."";
+$neturl = "https://api.phish.net/v3/setlist/get?apikey=".$apikey."&showdate=".$showdate."";
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -197,7 +198,7 @@ $payloadarray = array(
   "markdwn" => true,
 );
 
-$slack_webhook_url = "https://hooks.slack.com/services/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";
+$slack_webhook_url = getenv('WEB_HOOK');
 $json_payload = json_encode($payloadarray);
 $slack_call = curl_init($slack_webhook_url);
 curl_setopt($slack_call, CURLOPT_CUSTOMREQUEST, "POST");                                                                     

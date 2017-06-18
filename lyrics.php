@@ -25,7 +25,7 @@ $payloadarray = array(
   "text" => $decodelyrics,
   "markdwn" => true,
 );
-$slack_webhook_url = "https://hooks.slack.com/services/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";
+$slack_webhook_url = getenv('WEB_HOOK');
 $json_payload = json_encode($payloadarray);
 $slack_call = curl_init($slack_webhook_url);
 curl_setopt($slack_call, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
