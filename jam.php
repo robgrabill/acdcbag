@@ -64,7 +64,7 @@ if ($chartcheckarray[0]==NULL){
   $payloadtext .= "\n\n";
   $payloadtext .= "<".$streamlink."|".$winner.">";
   $payloadtext .= "\n\n";
-  $payloadtext .= "<".$streamlink2."|(mobile)";
+  $payloadtext .= "<".$streamlink2."|(mobile)>";
   $payloadtext .= "\n\n";
   $payloadtext .= "*".$venue."*";
   $payloadtext .= "\n\n";
