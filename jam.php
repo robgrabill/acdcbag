@@ -35,7 +35,7 @@ if ($chartcheckarray[0]==NULL){
   $winnerdesc = ($array[$desckey]);
   $winnerdesc2 = str_replace("&quot;", "", $winnerdesc);
   $streamlink = "http://phish.in/".$winner."/".$cleantext."/";
-  $streamlink2 = "http://phishtracks.com/shows/".$winner."/".$cleantext.";
+  $streamlink2 = "http://phishtracks.com/shows/".$winner."/".$cleantext."";
   $venueurl = "http://phish.in/api/v1/shows/:".$winner."";
 
   $curl = curl_init();
