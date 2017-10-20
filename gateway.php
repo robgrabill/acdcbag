@@ -5,8 +5,7 @@ include('randomfire.php');
 $parse = $_POST['text'];
 if (strpos($parse, 'setlist') !== false) {
     $parameter= substr(strstr("setlist"," "), 1); 
-    echo $parameter;
-    setlist_function();
+    setlist_function($parameter);
 } elseif (strpos($parse, 'jam') !==false) {
     $parameter= substr(strstr("jam"," "), 1); 
     echo $parameter;
