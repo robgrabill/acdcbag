@@ -1,5 +1,7 @@
 <?php
 include('simple_html_dom.php');
+function lyrics_function()
+{
 $channel = $_POST['channel_id'];
 $text = $_POST['text'];
 //$channel = "@rob";
@@ -38,5 +40,6 @@ curl_setopt($slack_call, CURLOPT_HTTPHEADER, array(
 );                                                                                                                   
 $result = curl_exec($slack_call);
 curl_close($slack_call);
+}
 }
 ?>
