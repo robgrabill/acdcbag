@@ -29,7 +29,7 @@ $decode = json_decode($response);
 $array = json_decode(json_encode($decode), true);
 $exists = ($array["success"]);
 if ($exists==NULL){
-  echo $showdate;
+  echo "Setlist Not Found";
 } else {
 
 $setlist = "----------------\n";
