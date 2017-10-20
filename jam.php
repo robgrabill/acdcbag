@@ -1,9 +1,9 @@
 <?php
 include('simple_html_dom.php');
-function jam_function()
+function jam_function($parameter)
 {
 $channel = $_POST['channel_id'];
-$text = $_POST['text'];
+$text = $parameter;
 $cleantext = str_replace(" ", "-", $text);
 $cleantext = strtolower($cleantext);
 $url = "http://phish.net/jamcharts/song/".$cleantext."/";
