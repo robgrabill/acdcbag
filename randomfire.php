@@ -1,5 +1,6 @@
 <?php
-
+function randomfire_function()
+{
 $channel = $_POST['channel_id'];
 $url = "http://phish.in/api/v1/random-show";
 $userrating = $_POST['text'];;
@@ -211,5 +212,5 @@ curl_setopt($slack_call, CURLOPT_HTTPHEADER, array(
 );                                                                                                                   
 $result = curl_exec($slack_call);
 curl_close($slack_call);
-
+}
 ?>
