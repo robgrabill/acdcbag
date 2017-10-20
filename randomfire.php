@@ -1,9 +1,9 @@
 <?php
-function randomfire_function()
+function randomfire_function($parameter)
 {
 $channel = $_POST['channel_id'];
 $url = "http://phish.in/api/v1/random-show";
-$userrating = $_POST['text'];;
+$userrating = $parameter;
 $loadingarray = array(
   "username" => "AC/DC Bag",
   "channel" => $channel,
