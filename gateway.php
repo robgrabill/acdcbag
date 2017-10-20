@@ -1,4 +1,7 @@
 <?php
 include('setlist.php');
-setlist_function();
+include('randomfire.php');
+include('jam.php');
+include('lyrics.php');
+randomfire_function();
 ?>
