@@ -1,5 +1,7 @@
 <?php
 include('simple_html_dom.php');
+function jam_function()
+{
 $channel = $_POST['channel_id'];
 $text = $_POST['text'];
 $cleantext = str_replace(" ", "-", $text);
@@ -91,5 +93,6 @@ if ($chartcheckarray[0]==NULL){
   curl_close($slack_call);
   } else {
   echo "No JamChart exists for that song.";
+}
 }
 ?>
