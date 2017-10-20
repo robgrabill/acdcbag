@@ -1,8 +1,8 @@
 <?php
-function setlist_function()
+function setlist_function($parameter)
 {
 $channel = $_POST['channel_id'];
-$showdate = $_POST['text'];
+$showdate = $parameter;
 $url = "http://phish.in/api/v1/shows/:".$showdate."";
 
 //$channel = "#bottests";
