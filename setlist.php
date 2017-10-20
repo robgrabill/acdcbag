@@ -1,5 +1,6 @@
 <?php
-
+function setlist_function()
+{
 $channel = $_POST['channel_id'];
 $showdate = $_POST['text'];
 $url = "http://phish.in/api/v1/shows/:".$showdate."";
@@ -173,4 +174,6 @@ curl_setopt($slack_call, CURLOPT_HTTPHEADER, array(
 $result = curl_exec($slack_call);
 curl_close($slack_call);
 }
+}
+setlist_function();
 ?>
