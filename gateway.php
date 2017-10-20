@@ -5,17 +5,13 @@ include('randomfire.php');
 $parse = $_POST['text'];
 if (strpos($parse, 'setlist') !== false) {
     $parameter= substr(strstr("$parse"," "), 1); 
-    echo "boop";
-    echo $parameter;
     setlist_function($parameter);
 } elseif (strpos($parse, 'jam') !==false) {
     $parameter= substr(strstr("$parse"," "), 1); 
-    echo $parameter;
-    jam_function();
+    jam_function($parameter);
 } elseif (strpos($parse, 'randomfire') !==false) {
     $parameter= substr(strstr("$parse"," "), 1); 
-    echo $parameter;
-    randomfire_function();
+    randomfire_function($parameter);
 } else {
    echo "Foggy, rather groggy. Try again.";
 }
