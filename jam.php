@@ -3,6 +3,18 @@ include('simple_html_dom.php');
 function jam_function($parameter)
 {
 $channel = $_POST['channel_id'];
+
+// Splits off end of parameter and checks for date format. If found, calls main function with title and date. If not, calls random date function.
+$pieces = explode(' ', $parameter);
+$jamdate = array_pop($pieces);
+if (strpos($jamdate, '-') !== false) {
+    $jamtitle = implode(" ", $pieces);
+    jamwithdate_function($jamtitle, $jamwithdate);
+} else {
+    jamwithoutdate_function($jamtitle);
+}
+  
+
 $text = $parameter;
 $cleantext = str_replace(" ", "-", $text);
 $cleantext = strtolower($cleantext);
