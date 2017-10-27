@@ -4,36 +4,22 @@ $channel = $_POST['channel_id'];
 $parameter = "Slave to the Traffic Light";
 
 //Check for date, prepare song title and date (if it exists) for URL.
-function jam_function($parameter)
-{
-$pieces = explode(' ', $parameter);
-$jamdate = array_pop($pieces);
-if (substr_count($jamdate, '-') !== 0) {
-    $jamtitle = implode(" ", $pieces);
-    $jamtitledash = str_replace(" ", "-", $jamtitle);
-    $jamtitledash = strtolower($jamtitledash);
-    jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel);
-} else {
-    $jamtitle = $parameter;
-    $jamtitledash = str_replace(" ", "-", $jamtitle);
-    $jamtitledash = strtolower($jamtitledash);
-    $jamdate = "Need a date, brah";
-    jamwithoutdate_function($jamtitle, $jamtitledash, $channel);
-}
+//Check for date, prepare song title and date (if it exists) for URL.
+
 function jamwithoutdate_function($jamtitle, $jamtitledash, $channel)
 {
-$url = "http://phish.net/jamcharts/song/".$jamtitledash."/";
-$html = file_get_html($url);
-$chartcheckdump = $html->find('h2');
-$chartcheckarray = array();
-foreach ($chartcheckdump as $man) {
+ $url = "http://phish.net/jamcharts/song/".$jamtitledash."/";
+ $html = file_get_html($url);
+ $chartcheckdump = $html->find('h2');
+ $chartcheckarray = array();
+ foreach ($chartcheckdump as $man) {
   $chartcheckarray[] = $man->plaintext;
-}
-$ccstring = ($chartcheckarray[0]);
-$ccpos = strpos($ccstring, "0 entries");
-if ($chartcheckarray[0]==NULL){
+ }
+ $ccstring = ($chartcheckarray[0]);
+ $ccpos = strpos($ccstring, "0 entries");
+ if ($chartcheckarray[0]==NULL){
   echo "Couldn't find that song. Try again.";
-} elseif ($ccpos===FALSE){
+ } elseif ($ccpos===FALSE){
   $es = $html->find('table td');
   $array = array();
   foreach ($es as $boy) {
@@ -104,6 +90,7 @@ if ($chartcheckarray[0]==NULL){
   echo "No JamChart exists for that song.";
 }
 }
+
 function jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
 {
   $streamlink = "http://phish.in/".$jamdate."/".$jamtitledash."/";
@@ -136,6 +123,22 @@ function jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
   $result = curl_exec($slack_call);
   curl_close($slack_call);
 }
+
+function jam_function($parameter)
+{
+$pieces = explode(' ', $parameter);
+$jamdate = array_pop($pieces);
+if (substr_count($jamdate, '-') !== 0) {
+    $jamtitle = implode(" ", $pieces);
+    $jamtitledash = str_replace(" ", "-", $jamtitle);
+    $jamtitledash = strtolower($jamtitledash);
+    jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel);
+} else {
+    $jamtitle = $parameter;
+    $jamtitledash = str_replace(" ", "-", $jamtitle);
+    $jamtitledash = strtolower($jamtitledash);
+    $jamdate = "Need a date, brah";
+    jamwithoutdate_function($jamtitle, $jamtitledash, $channel);
 }
-jam_function($paramter);
+}
 ?>
