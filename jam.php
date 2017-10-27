@@ -1,9 +1,7 @@
 <?php
 include('simple_html_dom.php');
 $channel = $_POST['channel_id'];
-$parameter = "Slave to the Traffic Light";
 
-//Check for date, prepare song title and date (if it exists) for URL.
 //Check for date, prepare song title and date (if it exists) for URL.
 
 function jamwithoutdate_function($jamtitle, $jamtitledash, $channel)
