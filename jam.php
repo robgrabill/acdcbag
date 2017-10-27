@@ -65,6 +65,7 @@ function jamwithoutdate_function($jamtitle, $jamtitledash, $channel)
   $payloadtext .= "*".$venue."*";
   $payloadtext .= "\n\n";
   $payloadtext .= $winnerdesc2;
+  $channel = $_POST['channel_id'];
   $payloadarray = array(
     "username" => "AC/DC Bag",
     "channel" => $channel,
@@ -101,6 +102,7 @@ function jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
   $payloadtext .= "<".$streamlink."|phish.in>";
   $payloadtext .= "\n\n";
   $payloadtext .= "<".$streamlink2."|Phish Tracks>";
+  $channel = $_POST['channel_id'];
   $payloadarray = array(
     "username" => "AC/DC Bag",
     "channel" => $channel,
