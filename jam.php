@@ -1,8 +1,10 @@
 <?php
 include('simple_html_dom.php');
 $channel = $_POST['channel_id'];
-$parameter = $_POST['text'];
+
 //Check for date, prepare song title and date (if it exists) for URL.
+function jam_function($parameter)
+{
 $pieces = explode(' ', $parameter);
 $jamdate = array_pop($pieces);
 if (substr_count($jamdate, '-') !== 0) {
@@ -132,5 +134,6 @@ function jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
   );                                                                                                                   
   $result = curl_exec($slack_call);
   curl_close($slack_call);
+}
 }
 ?>
