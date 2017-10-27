@@ -9,7 +9,7 @@ if (substr_count($jamdate, '-') !== 0) {
     $jamtitle = implode(" ", $pieces);
     $jamtitledash = str_replace(" ", "-", $jamtitle);
     $jamtitledash = strtolower($jamtitledash);
-//    jamwithdate_function($jamtitledash, $jamdate);
+    jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel);
 } else {
     $jamtitle = $parameter;
     $jamtitledash = str_replace(" ", "-", $jamtitle);
@@ -102,5 +102,34 @@ if ($chartcheckarray[0]==NULL){
   echo "No JamChart exists for that song.";
 }
 }
-  
+jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
+{
+  $streamlink = "http://phish.in/".$winner."/".$jamtitledash."/";
+  $streamlink2 = "http://phishtracks.com/shows/".$winner."/".$jamtitledash."";
+  $payloadtext = "----------------\n";
+  $payloadtext .= "Random Jamchart Version of ";
+  $payloadtext .= $jamtitle;
+  $payloadtext .= "\n\n";
+  $payloadtext .= "<".$streamlink."|".$jamdate.">";
+  $payloadtext .= "\n\n";
+  $payloadtext .= "<".$streamlink2."|(mobile)>";
+  $payloadarray = array(
+    "username" => "AC/DC Bag",
+    "channel" => $channel,
+    "text" => $payloadtext,
+    "markdwn" => true,
+  );
+  $slack_webhook_url = getenv('WEB_HOOK');
+  $json_payload = json_encode($payloadarray);
+  $slack_call = curl_init($slack_webhook_url);
+  curl_setopt($slack_call, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+  curl_setopt($slack_call, CURLOPT_POSTFIELDS, $json_payload);
+  curl_setopt($slack_call, CURLOPT_CRLF, true);                                                               
+  curl_setopt($slack_call, CURLOPT_RETURNTRANSFER, true);                                                                      
+  curl_setopt($slack_call, CURLOPT_HTTPHEADER, array(                                                                          
+    "Content-Type: application/json",                                                                                
+    "Content-Length: " . strlen($json_payload))                                                                       
+  );                                                                                                                   
+  $result = curl_exec($slack_call);
+  curl_close($slack_call);
 ?>
