@@ -122,7 +122,7 @@ function jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
   curl_close($slack_call);
 }
 
-function jam_function($parameter)
+function jam_function($parameter, $channel)
 {
 $pieces = explode(' ', $parameter);
 $jamdate = array_pop($pieces);
