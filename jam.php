@@ -1,6 +1,7 @@
 <?php
 include('simple_html_dom.php');
 $channel = $_POST['channel_id'];
+$parameter = "Slave to the Traffic Light";
 
 //Check for date, prepare song title and date (if it exists) for URL.
 function jam_function($parameter)
@@ -136,4 +137,5 @@ function jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
   curl_close($slack_call);
 }
 }
+jam_function($paramter);
 ?>
