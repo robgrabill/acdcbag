@@ -3,6 +3,7 @@ include('setlist.php');
 include('jam.php');
 include('randomfire.php');
 $parse = $_POST['text'];
+$channel = $_POST['channel'];
 if (strpos($parse, 'setlist') !== false) {
     $parameter= substr(strstr("$parse"," "), 1); 
     setlist_function($parameter);
