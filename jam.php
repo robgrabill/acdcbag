@@ -105,15 +105,15 @@ if ($chartcheckarray[0]==NULL){
 
 function jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
 {
-  $streamlink = "http://phish.in/".$winner."/".$jamtitledash."/";
-  $streamlink2 = "http://phishtracks.com/shows/".$winner."/".$jamtitledash."";
+  $streamlink = "http://phish.in/".$jamdate."/".$jamtitledash."/";
+  $streamlink2 = "http://phishtracks.com/shows/".$jamdate."/".$jamtitledash."";
   $payloadtext = "----------------\n";
-  $payloadtext .= "Random Jamchart Version of ";
+  $payloadtext .= .$jamdate." Version of ";
   $payloadtext .= $jamtitle;
   $payloadtext .= "\n\n";
-  $payloadtext .= "<".$streamlink."|".$jamdate.">";
+  $payloadtext .= "<".$streamlink."|phish.in>";
   $payloadtext .= "\n\n";
-  $payloadtext .= "<".$streamlink2."|(mobile)>";
+  $payloadtext .= "<".$streamlink2."|Phish Tracks>";
   $payloadarray = array(
     "username" => "AC/DC Bag",
     "channel" => $channel,
