@@ -1,8 +1,7 @@
 <?php
 include('simple_html_dom.php');
-$parameter = "Slave To the Traffic Light";
 $channel = $_POST['channel_id'];
-
+$parameter = $_POST['text'];
 //Check for date, prepare song title and date (if it exists) for URL.
 $pieces = explode(' ', $parameter);
 $jamdate = array_pop($pieces);
