@@ -17,7 +17,6 @@ if (substr_count($jamdate, '-') !== 0) {
     $jamdate = "Need a date, brah";
     jamwithoutdate_function($jamtitle, $jamtitledash, $channel);
 }
-
 function jamwithoutdate_function($jamtitle, $jamtitledash, $channel)
 {
 $url = "http://phish.net/jamcharts/song/".$jamtitledash."/";
@@ -102,13 +101,13 @@ if ($chartcheckarray[0]==NULL){
   echo "No JamChart exists for that song.";
 }
 }
-
 function jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
 {
   $streamlink = "http://phish.in/".$jamdate."/".$jamtitledash."/";
   $streamlink2 = "http://phishtracks.com/shows/".$jamdate."/".$jamtitledash."";
   $payloadtext = "----------------\n";
-  $payloadtext .= .$jamdate." Version of ";
+  $payloadtext .= $jamdate;
+  $payloadtext .= " Version of ";
   $payloadtext .= $jamtitle;
   $payloadtext .= "\n\n";
   $payloadtext .= "<".$streamlink."|phish.in>";
