@@ -9,12 +9,18 @@ $pieces = explode(' ', $parameter);
 $jamdate = array_pop($pieces);
 if (strpos($jamdate, '-') !== false) {
     $jamtitle = implode(" ", $pieces);
-    jamwithdate_function($jamtitle, $jamwithdate);
+    $jamtitle = str_replace(" ", "-", $jamtitle);
+    $jamtitle = strtolower($jamtitle);
+//    jamwithdate_function($jamtitle, $jamwithdate);
 } else {
-    jamwithoutdate_function($jamtitle);
+    $jamtitle = str_replace(" ", "-", $parameter);
+    $jamtitle = strtolower($jamtitle);
+//    jamwithoutdate_function($jamtitle);
 }
+echo $jamtitle;
+echo $jamdate;
   
-
+/*
 $text = $parameter;
 $cleantext = str_replace(" ", "-", $text);
 $cleantext = strtolower($cleantext);
@@ -107,4 +113,5 @@ if ($chartcheckarray[0]==NULL){
   echo "No JamChart exists for that song.";
 }
 }
+*/
 ?>
