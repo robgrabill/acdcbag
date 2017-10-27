@@ -102,7 +102,8 @@ if ($chartcheckarray[0]==NULL){
   echo "No JamChart exists for that song.";
 }
 }
-jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
+
+function jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
 {
   $streamlink = "http://phish.in/".$winner."/".$jamtitledash."/";
   $streamlink2 = "http://phishtracks.com/shows/".$winner."/".$jamtitledash."";
