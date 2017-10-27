@@ -132,4 +132,5 @@ jamwithdate_function($jamtitle, $jamtitledash, $jamdate, $channel)
   );                                                                                                                   
   $result = curl_exec($slack_call);
   curl_close($slack_call);
+}
 ?>
