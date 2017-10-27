@@ -1,30 +1,27 @@
 <?php
 include('simple_html_dom.php');
-function jam_function($parameter)
-{
+$parameter = "Slave To the Traffic Light";
 $channel = $_POST['channel_id'];
 
-// Splits off end of parameter and checks for date format. If found, calls main function with title and date. If not, calls random date function.
+//Check for date, prepare song title and date (if it exists) for URL.
 $pieces = explode(' ', $parameter);
 $jamdate = array_pop($pieces);
-if (strpos($jamdate, '-') !== false) {
+if (substr_count($jamdate, '-') !== 0) {
     $jamtitle = implode(" ", $pieces);
-    $jamtitle = str_replace(" ", "-", $jamtitle);
-    $jamtitle = strtolower($jamtitle);
-//    jamwithdate_function($jamtitle, $jamwithdate);
+    $jamtitledash = str_replace(" ", "-", $jamtitle);
+    $jamtitledash = strtolower($jamtitledash);
+//    jamwithdate_function($jamtitledash, $jamdate);
 } else {
-    $jamtitle = str_replace(" ", "-", $parameter);
-    $jamtitle = strtolower($jamtitle);
-//    jamwithoutdate_function($jamtitle);
+    $jamtitle = $parameter;
+    $jamtitledash = str_replace(" ", "-", $jamtitle);
+    $jamtitledash = strtolower($jamtitledash);
+    $jamdate = "Need a date, brah";
+    jamwithoutdate_function($jamtitle, $jamtitledash, $channel);
 }
-echo $jamtitle;
-echo $jamdate;
-  
-/*
-$text = $parameter;
-$cleantext = str_replace(" ", "-", $text);
-$cleantext = strtolower($cleantext);
-$url = "http://phish.net/jamcharts/song/".$cleantext."/";
+
+function jamwithoutdate_function($jamtitle, $jamtitledash, $channel)
+{
+$url = "http://phish.net/jamcharts/song/".$jamtitledash."/";
 $html = file_get_html($url);
 $chartcheckdump = $html->find('h2');
 $chartcheckarray = array();
@@ -33,7 +30,6 @@ foreach ($chartcheckdump as $man) {
 }
 $ccstring = ($chartcheckarray[0]);
 $ccpos = strpos($ccstring, "0 entries");
-
 if ($chartcheckarray[0]==NULL){
   echo "Couldn't find that song. Try again.";
 } elseif ($ccpos===FALSE){
@@ -48,18 +44,15 @@ if ($chartcheckarray[0]==NULL){
       $keeperarray[] = $keeper;
     }
   }
-
   $winnerkey = array_rand($keeperarray);
   $winner = ($keeperarray[$winnerkey]);
   $desckey = $winnerkey*5+4;
   $winnerdesc = ($array[$desckey]);
   $winnerdesc2 = str_replace("&quot;", "", $winnerdesc);
-  $streamlink = "http://phish.in/".$winner."/".$cleantext."/";
-  $streamlink2 = "http://phishtracks.com/shows/".$winner."/".$cleantext."";
+  $streamlink = "http://phish.in/".$winner."/".$jamtitledash."/";
+  $streamlink2 = "http://phishtracks.com/shows/".$winner."/".$jamtitledash."";
   $venueurl = "http://phish.in/api/v1/shows/:".$winner."";
-
   $curl = curl_init();
-
   curl_setopt_array($curl, array(
     CURLOPT_URL => "$venueurl",
     CURLOPT_RETURNTRANSFER => true,
@@ -70,17 +63,15 @@ if ($chartcheckarray[0]==NULL){
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_POSTFIELDS => "{}",
   ));
-
   $response = curl_exec($curl);
   $err = curl_error($curl);
   curl_close($curl);
   $decode = json_decode($response);
   $venuearray = json_decode(json_encode($decode), true);
   $venue = ($venuearray["data"]["venue"]["name"]);
-
   $payloadtext = "----------------\n";
   $payloadtext .= "Random Jamchart Version of ";
-  $payloadtext .= $text;
+  $payloadtext .= $jamtitle;
   $payloadtext .= "\n\n";
   $payloadtext .= "<".$streamlink."|".$winner.">";
   $payloadtext .= "\n\n";
@@ -89,7 +80,6 @@ if ($chartcheckarray[0]==NULL){
   $payloadtext .= "*".$venue."*";
   $payloadtext .= "\n\n";
   $payloadtext .= $winnerdesc2;
-
   $payloadarray = array(
     "username" => "AC/DC Bag",
     "channel" => $channel,
@@ -113,5 +103,5 @@ if ($chartcheckarray[0]==NULL){
   echo "No JamChart exists for that song.";
 }
 }
-*/
+  
 ?>
