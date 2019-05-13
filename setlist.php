@@ -19,6 +19,12 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "GET",
   CURLOPT_POSTFIELDS => "{}",
+  CURLOPT_HTTPHEADER => array(
+    "accept: application/json",
+    "authorization: 1424bc7de102445b1f788d0d589c44120032c379bd74c8f081b1f94e6c4c4d3e8d831b8b1b99dc89d469b21a2bf12ee3",
+    "cache-control: no-cache",
+    "postman-token: 25e77aed-7681-9476-fab4-14129d3f78e6"
+  ),
 ));
 
 $response = curl_exec($curl);
