@@ -3,36 +3,64 @@ include('simple_html_dom.php');
 
 // Create variables for the channel to post back to and the text that was searched for.
 $channel = $_POST['channel_id'];
-$text = $_POST['text'];
+$searchsong = $_POST['text'];
 
 //Create slug used to build song URL and Jamchart URL
-$cleantext = str_replace(" ", "-", $text);
-$cleantext = strtolower($cleantext);
+$cleantext = str_replace(" ", "-", $searchsong);
+$cleantext = strtolower($searchsong);
+
+//Set API keys
+$netapikey = getenv('NET_API');
+$inapikey = getenv('IN_API');
+
+//API Call to .in /jamcharts/all
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://api.phish.net/v3/jamcharts/all?apikey=".$apikey."",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 57427df8-c638-d883-64f8-d23630d801d7"
+  ),
+));
+$netresponse = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+
+//Step 4
+$netdecode = json_decode($netresponse);
+$netarray = json_decode(json_encode($netdecode), true);
+
 
 //Grab jamchart and dump into array... then do some other stuff. Not gonna worry about this too much as it's all going away with v2.
-$url = "http://phish.net/jamcharts/song/".$cleantext."/";
-$html = file_get_html($url);
-$chartcheckdump = $html->find('h2');
-$chartcheckarray = array();
-foreach ($chartcheckdump as $man) {
-  $chartcheckarray[] = $man->plaintext;
-}
-$ccstring = ($chartcheckarray[0]);
-$ccpos = strpos($ccstring, "0 entries");
-if ($chartcheckarray[0]==NULL){
-  echo "Couldn't find that song. Try again.";
-} elseif ($ccpos===FALSE){
-  $es = $html->find('table td');
-  $array = array();
-  foreach ($es as $boy) {
-    $array[] = $boy->plaintext;
-  }
-  $keeperarray = array();
-  foreach ($array as $keeper) {
-    if (strlen($keeper)==10) {
-      $keeperarray[] = $keeper;
-    }
-  }
+//$url = "http://phish.net/jamcharts/song/".$cleantext."/";
+//$html = file_get_html($url);
+//$chartcheckdump = $html->find('h2');
+//$chartcheckarray = array();
+//foreach ($chartcheckdump as $man) {
+//  $chartcheckarray[] = $man->plaintext;
+//}
+//$ccstring = ($chartcheckarray[0]);
+//$ccpos = strpos($ccstring, "0 entries");
+//if ($chartcheckarray[0]==NULL){
+//  echo "Couldn't find that song. Try again.";
+//} elseif ($ccpos===FALSE){
+//  $es = $html->find('table td');
+//  $array = array();
+//  foreach ($es as $boy) {
+//    $array[] = $boy->plaintext;
+//  }
+//  $keeperarray = array();
+//  foreach ($array as $keeper) {
+//    if (strlen($keeper)==10) {
+//      $keeperarray[] = $keeper;
+//    }
+//  }
   
 //In lieu of the jamchart scraping, here's where we'll need to do steps 4-8. It should be simpler than what's above, but there may be some stuff to pick up/copy over.
   
